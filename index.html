@@ -70,7 +70,7 @@
 
   <!-- Script -->
   <script>
-    fetch('towers.json')
+    fetch('https://raw.githubusercontent.com/blazingror/infectimon/main/towers.json')
       .then(res => res.json())
       .then(data => {
         const grid = document.getElementById('towerGrid');
