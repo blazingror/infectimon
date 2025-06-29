@@ -55,6 +55,14 @@
     </div>
   </section>
 
+  <!-- Promo Codes Section -->
+  <section id="promoSection" class="p-8 bg-gray-900">
+    <div class="container mx-auto">
+      <h3 class="text-2xl font-bold mb-6">🎁 Promo Codes</h3>
+      <div id="promoGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+  </section>
+
   <!-- Towers Section -->
   <section id="towerSection" class="p-8 bg-gray-800">
     <div class="container mx-auto">
@@ -70,6 +78,7 @@
 
   <!-- Script -->
   <script>
+    // Load Towers
     fetch('https://raw.githubusercontent.com/blazingror/infectimon/main/towers.json')
       .then(res => res.json())
       .then(data => {
@@ -92,6 +101,7 @@
         });
       });
 
+    // Emojis for Type
     function getTypeEmoji(type) {
       const map = {
         AOE: '🌋',
@@ -104,6 +114,7 @@
       return map[type] || '❓';
     }
 
+    // Emojis for Stat Type
     function getStatEmoji(statType) {
       const map = {
         Fire: '🔥',
@@ -114,6 +125,35 @@
         Dark: '🌑'
       };
       return map[statType] || '❓';
+    }
+
+    // Promo Code Data
+    const promoCodes = {
+      "RE:001": { Coins: 200, Gems: 50 },
+      "RE:002": { Coins: 100 },
+      "RE:003": { Gems: 100 },
+      "DEV:SECRET": { Coins: 9999, Gems: 9999, devOnly: true },
+      "VIP:START": { Coins: 1500, Gems: 300, vipOnly: true }
+    };
+
+    const promoGrid = document.getElementById('promoGrid');
+    for (const code in promoCodes) {
+      const info = promoCodes[code];
+      const card = document.createElement('div');
+      card.className = "bg-gray-800 p-6 rounded shadow";
+
+      let tags = '';
+      if (info.devOnly) tags += `<span class="bg-red-600 text-xs px-2 py-1 rounded ml-2">DEV ONLY</span>`;
+      if (info.vipOnly) tags += `<span class="bg-yellow-500 text-xs px-2 py-1 rounded ml-2">VIP ONLY</span>`;
+
+      card.innerHTML = `
+        <h4 class="text-lg font-bold mb-2">${code} ${tags}</h4>
+        <ul class="text-sm space-y-1">
+          ${info.Coins ? `<li>🪙 Coins: ${info.Coins}</li>` : ''}
+          ${info.Gems ? `<li>💎 Gems: ${info.Gems}</li>` : ''}
+        </ul>
+      `;
+      promoGrid.appendChild(card);
     }
   </script>
 </body>
