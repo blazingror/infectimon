@@ -1,1 +1,120 @@
+[
+  {
+    "id": "#001",
+    "name": "Scorchid",
+    "type": "AOE",
+    "damage": 80,
+    "range": 15,
+    "cooldown": 1.5,
+    "cost": 100
+  },
+  {
+    "id": "#002",
+    "name": "Blazid",
+    "type": "AOE",
+    "damage": 100,
+    "range": 15,
+    "cooldown": 1,
+    "cost": 400
+  },
+  {
+    "id": "#003",
+    "name": "InterFlame",
+    "type": "AOE",
+    "damage": 250,
+    "range": 15,
+    "cooldown": 0.5,
+    "cost": 1000
+  },
+  {
+    "id": "#004",
+    "name": "Bubblix",
+    "type": "Pierce",
+    "damage": 50,
+    "range": 20,
+    "cooldown": 1.5,
+    "cost": 100
+  },
+  {
+    "id": "#005",
+    "name": "Droplash",
+    "type": "Pierce",
+    "damage": 50,
+    "range": 15,
+    "cooldown": 0.5,
+    "cost": 400
+  },
+  {
+    "id": "#006",
+    "name": "Torrentaur",
+    "type": "Pierce",
+    "damage": 200,
+    "range": 15,
+    "cooldown": 0.5,
+    "cost": 1000
+  },
+  {
+    "id": "#007",
+    "name": "Budroot",
+    "type": "Rapid",
+    "damage": 80,
+    "range": 10,
+    "cooldown": 2,
+    "cost": 100
+  },
+  {
+    "id": "#008",
+    "name": "Thornid",
+    "type": "Rapid",
+    "damage": 50,
+    "range": 15,
+    "cooldown": 2,
+    "cost": 400
+  },
+  {
+    "id": "#009",
+    "name": "Verdawn",
+    "type": "AOE",
+    "damage": 300,
+    "range": 15,
+    "cooldown": 0.5,
+    "cost": 1000
+  },
+  {
+    "id": "#010",
+    "name": "Nibblit",
+    "type": "FarmTime",
+    "damage": 0,
+    "range": 0,
+    "cooldown": 0,
+    "cost": 200
+  },
+  {
+    "id": "#011",
+    "name": "Chewrat",
+    "type": "FarmWave",
+    "damage": 0,
+    "range": 0,
+    "cooldown": 0,
+    "cost": 500
+  },
+  {
+    "id": "#012",
+    "name": "Buzzakeet",
+    "type": "Chain",
+    "damage": 50,
+    "range": 15,
+    "cooldown": 1,
+    "cost": 400
+  },
+  {
+    "id": "#013",
+    "name": "Zaparot",
+    "type": "Chain",
+    "damage": 100,
+    "range": 20,
+    "cooldown": 1,
+    "cost": 1200
+  }
+]
 
