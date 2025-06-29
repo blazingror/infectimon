@@ -7,6 +7,7 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-900 text-white font-sans">
+
   <!-- Header -->
   <header class="bg-gray-800 p-4 shadow-lg">
     <div class="container mx-auto flex justify-between items-center">
@@ -54,9 +55,53 @@
     </div>
   </section>
 
+  <!-- Towers Section -->
+  <section id="towerSection" class="p-8 bg-gray-800">
+    <div class="container mx-auto">
+      <h3 class="text-2xl font-bold mb-6">🗼 Towers in Game</h3>
+      <div id="towerGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+  </section>
+
   <!-- Footer -->
   <footer class="bg-gray-800 text-center p-4">
     <p>&copy; 2025 DEVSHASTRA. All rights reserved. | <a href="https://www.youtube.com/@DevShastraIND" class="underline">YouTube</a></p>
   </footer>
+
+  <!-- Script -->
+  <script>
+    fetch('towers.json')
+      .then(res => res.json())
+      .then(data => {
+        const grid = document.getElementById('towerGrid');
+        data.forEach(tower => {
+          const el = document.createElement('div');
+          el.className = "bg-gray-900 p-6 rounded shadow-lg";
+          el.innerHTML = `
+            <h4 class="text-xl font-semibold mb-2">${tower.id} - ${tower.name}</h4>
+            <p class="mb-2">${getEmoji(tower.type)} Type: ${tower.type}</p>
+            <ul class="text-sm space-y-1">
+              <li>💥 Damage: ${tower.damage}</li>
+              <li>📏 Range: ${tower.range}</li>
+              <li>⏱️ Cooldown: ${tower.cooldown}s</li>
+              <li>🪙 Cost: ${tower.cost}</li>
+            </ul>
+          `;
+          grid.appendChild(el);
+        });
+      });
+
+    function getEmoji(type) {
+      const map = {
+        AOE: '🌋',
+        Pierce: '🎯',
+        Rapid: '💨',
+        Chain: '⚡',
+        FarmTime: '🌾',
+        FarmWave: '🌊'
+      };
+      return map[type] || '❓';
+    }
+  </script>
 </body>
 </html>
