@@ -17,6 +17,36 @@
       }
     }
   </style>
+  <style>
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: radial-gradient(white 1px, transparent 1px),
+                radial-gradient(white 1px, transparent 1px);
+    background-position: 0 0, 25px 25px;
+    background-size: 50px 50px;
+    animation: moveBg 60s linear infinite;
+    opacity: 0.05;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  @keyframes moveBg {
+    from {
+      transform: translate(0, 0);
+    }
+    to {
+      transform: translate(-100px, -100px);
+    }
+  }
+
+  main, header, section, footer {
+    position: relative;
+    z-index: 1;
+  }
+</style>
 </head>
 <body class="bg-gray-900 text-white font-sans">
 
