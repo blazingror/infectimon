@@ -133,15 +133,18 @@
       Object.entries(promoCodes).forEach(([code, rewards]) => {
         const card = document.createElement('div');
         card.className = "bg-gray-800 p-6 rounded shadow transform transition duration-300 hover:scale-105 hover:shadow-xl fade-in";
-        card.innerHTML = `
-          <h4 class="text-xl font-semibold mb-2">Code: ${code}</h4>
-          <ul class="text-sm space-y-1">
-            ${rewards.Coins ? `<li>🪙 Coins: ${rewards.Coins}</li>` : ''}
-            ${rewards.Gems ? `<li>💎 Gems: ${rewards.Gems}</li>` : ''}
-            ${rewards.devOnly ? `<li>🛠️ Dev Only</li>` : ''}
-            ${rewards.vipOnly ? `<li>👑 VIP Only</li>` : ''}
-          </ul>
-        `;
+       card.innerHTML = `
+  <h4 class="text-xl font-semibold mb-2">Code: ${code}</h4>
+  <ul class="text-sm space-y-1 mb-2">
+    ${rewards.Coins ? `<li>🪙 Coins: ${rewards.Coins}</li>` : ''}
+    ${rewards.Gems ? `<li>💎 Gems: ${rewards.Gems}</li>` : ''}
+  </ul>
+  <div class="flex gap-2 flex-wrap">
+    ${rewards.devOnly ? `<span class="inline-block bg-purple-700 text-white text-xs px-2 py-1 rounded-full font-semibold">Dev Only</span>` : ''}
+    ${rewards.vipOnly ? `<span class="inline-block bg-yellow-600 text-white text-xs px-2 py-1 rounded-full font-semibold">VIP Only</span>` : ''}
+  </div>
+`;
+
         grid.appendChild(card);
       });
     }
