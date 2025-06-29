@@ -5,6 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>InfectiMon: Flukora's Secrets</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 0.8s ease-in-out forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
 </head>
 <body class="bg-gray-900 text-white font-sans">
 
@@ -12,7 +24,7 @@
   <header class="bg-gray-800 p-4 shadow-lg">
     <div class="container mx-auto flex justify-between items-center">
       <h1 class="text-3xl font-bold">InfectiMon</h1>
-      <a href="https://www.roblox.com/games/99752034959422/InfectiMon-Flukoras-Secrets" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">Play Now</a>
+      <a href="https://www.roblox.com/games/99752034959422/InfectiMon-Flukoras-Secrets" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded shadow transition duration-300 hover:shadow-lg hover:scale-105">Play Now</a>
     </div>
   </header>
 
@@ -21,7 +33,7 @@
     <div class="bg-black bg-opacity-50 p-8 rounded">
       <h2 class="text-4xl font-bold mb-2">Flukora's Secrets Await!</h2>
       <p class="text-lg mb-4">Train your InfectiMons. Defend the towers. Uncover the mystery.</p>
-      <a href="https://www.roblox.com/games/99752034959422/InfectiMon-Flukoras-Secrets" class="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded text-white font-bold">Play on Roblox</a>
+      <a href="https://www.roblox.com/games/99752034959422/InfectiMon-Flukoras-Secrets" class="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded text-white font-bold shadow transition duration-300 hover:shadow-xl hover:scale-105">Play on Roblox</a>
     </div>
   </section>
 
@@ -36,19 +48,19 @@
   <!-- Features Section -->
   <section class="p-8 bg-gray-900">
     <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div class="bg-gray-800 p-6 rounded">
+      <div class="bg-gray-800 p-6 rounded shadow fade-in transition duration-500 hover:shadow-lg">
         <h4 class="text-xl font-semibold mb-2">🎮 Gameplay</h4>
         <p>Strategic tower placement with leveling, types, and rebirths.</p>
       </div>
-      <div class="bg-gray-800 p-6 rounded">
+      <div class="bg-gray-800 p-6 rounded shadow fade-in transition duration-500 hover:shadow-lg">
         <h4 class="text-xl font-semibold mb-2">🧬 InfectiMons</h4>
         <p>Catch, train, and evolve dozens of unique monsters.</p>
       </div>
-      <div class="bg-gray-800 p-6 rounded">
+      <div class="bg-gray-800 p-6 rounded shadow fade-in transition duration-500 hover:shadow-lg">
         <h4 class="text-xl font-semibold mb-2">👾 Boss Waves</h4>
         <p>Face challenging enemies with special mechanics and abilities.</p>
       </div>
-      <div class="bg-gray-800 p-6 rounded">
+      <div class="bg-gray-800 p-6 rounded shadow fade-in transition duration-500 hover:shadow-lg">
         <h4 class="text-xl font-semibold mb-2">🎁 Promo Codes</h4>
         <p>Use codes to earn exclusive items, boosts, and rewards.</p>
       </div>
@@ -78,14 +90,39 @@
 
   <!-- Script -->
   <script>
-    // Load Towers
+    const promoCodes = {
+      "RE:001": { Coins: 200, Gems: 50 },
+      "RE:002": { Coins: 100 },
+      "RE:003": { Gems: 100 },
+      "DEV:SECRET": { Coins: 9999, Gems: 9999, devOnly: true },
+      "VIP:START": { Coins: 1500, Gems: 300, vipOnly: true }
+    };
+
+    function renderPromoCodes() {
+      const grid = document.getElementById('promoGrid');
+      Object.entries(promoCodes).forEach(([code, rewards]) => {
+        const card = document.createElement('div');
+        card.className = "bg-gray-800 p-6 rounded shadow transform transition duration-300 hover:scale-105 hover:shadow-xl fade-in";
+        card.innerHTML = `
+          <h4 class="text-xl font-semibold mb-2">Code: ${code}</h4>
+          <ul class="text-sm space-y-1">
+            ${rewards.Coins ? `<li>🪙 Coins: ${rewards.Coins}</li>` : ''}
+            ${rewards.Gems ? `<li>💎 Gems: ${rewards.Gems}</li>` : ''}
+            ${rewards.devOnly ? `<li>🛠️ Dev Only</li>` : ''}
+            ${rewards.vipOnly ? `<li>👑 VIP Only</li>` : ''}
+          </ul>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
     fetch('https://raw.githubusercontent.com/blazingror/infectimon/main/towers.json')
       .then(res => res.json())
       .then(data => {
         const grid = document.getElementById('towerGrid');
         data.forEach(tower => {
           const el = document.createElement('div');
-          el.className = "bg-gray-900 p-6 rounded shadow-lg";
+          el.className = "bg-gray-900 p-6 rounded shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl fade-in";
           el.innerHTML = `
             <h4 class="text-xl font-semibold mb-2">${tower.id} - ${tower.name}</h4>
             <p class="mb-1">${getTypeEmoji(tower.type)} Type: <strong>${tower.type}</strong></p>
@@ -101,7 +138,6 @@
         });
       });
 
-    // Emojis for Type
     function getTypeEmoji(type) {
       const map = {
         AOE: '🌋',
@@ -114,7 +150,6 @@
       return map[type] || '❓';
     }
 
-    // Emojis for Stat Type
     function getStatEmoji(statType) {
       const map = {
         Fire: '🔥',
@@ -127,34 +162,8 @@
       return map[statType] || '❓';
     }
 
-    // Promo Code Data
-    const promoCodes = {
-      "RE:001": { Coins: 200, Gems: 50 },
-      "RE:002": { Coins: 100 },
-      "RE:003": { Gems: 100 },
-      "DEV:SECRET": { Coins: 9999, Gems: 9999, devOnly: true },
-      "VIP:START": { Coins: 1500, Gems: 300, vipOnly: true }
-    };
-
-    const promoGrid = document.getElementById('promoGrid');
-    for (const code in promoCodes) {
-      const info = promoCodes[code];
-      const card = document.createElement('div');
-      card.className = "bg-gray-800 p-6 rounded shadow";
-
-      let tags = '';
-      if (info.devOnly) tags += `<span class="bg-red-600 text-xs px-2 py-1 rounded ml-2">DEV ONLY</span>`;
-      if (info.vipOnly) tags += `<span class="bg-yellow-500 text-xs px-2 py-1 rounded ml-2">VIP ONLY</span>`;
-
-      card.innerHTML = `
-        <h4 class="text-lg font-bold mb-2">${code} ${tags}</h4>
-        <ul class="text-sm space-y-1">
-          ${info.Coins ? `<li>🪙 Coins: ${info.Coins}</li>` : ''}
-          ${info.Gems ? `<li>💎 Gems: ${info.Gems}</li>` : ''}
-        </ul>
-      `;
-      promoGrid.appendChild(card);
-    }
+    // Kickstart
+    renderPromoCodes();
   </script>
 </body>
 </html>
