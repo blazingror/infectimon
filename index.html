@@ -79,7 +79,8 @@
           el.className = "bg-gray-900 p-6 rounded shadow-lg";
           el.innerHTML = `
             <h4 class="text-xl font-semibold mb-2">${tower.id} - ${tower.name}</h4>
-            <p class="mb-2">${getEmoji(tower.type)} Type: ${tower.type}</p>
+            <p class="mb-1">${getTypeEmoji(tower.type)} Type: <strong>${tower.type}</strong></p>
+            <p class="mb-2">${getStatEmoji(tower.statType)} Stat Type: <strong>${tower.statType}</strong></p>
             <ul class="text-sm space-y-1">
               <li>💥 Damage: ${tower.damage}</li>
               <li>📏 Range: ${tower.range}</li>
@@ -91,7 +92,7 @@
         });
       });
 
-    function getEmoji(type) {
+    function getTypeEmoji(type) {
       const map = {
         AOE: '🌋',
         Pierce: '🎯',
@@ -101,6 +102,18 @@
         FarmWave: '🌊'
       };
       return map[type] || '❓';
+    }
+
+    function getStatEmoji(statType) {
+      const map = {
+        Fire: '🔥',
+        Water: '💧',
+        Grass: '🌿',
+        Electric: '⚡',
+        Normal: '🎯',
+        Dark: '🌑'
+      };
+      return map[statType] || '❓';
     }
   </script>
 </body>
