@@ -10,11 +10,8 @@
       opacity: 0;
       animation: fadeIn 0.8s ease-in-out forwards;
     }
-
     @keyframes fadeIn {
-      to {
-        opacity: 1;
-      }
+      to { opacity: 1; }
     }
 
     body::before {
@@ -33,12 +30,8 @@
     }
 
     @keyframes moveBg {
-      from {
-        transform: translate(0, 0);
-      }
-      to {
-        transform: translate(-100px, -100px);
-      }
+      from { transform: translate(0, 0); }
+      to { transform: translate(-100px, -100px); }
     }
 
     main, header, section, footer {
@@ -173,34 +166,52 @@
       return map[statType] || '❓';
     }
 
+    let towersData = [];
+
+    function renderTowers(data) {
+      const grid = document.getElementById('towerGrid');
+      grid.innerHTML = "";
+      data.forEach(tower => {
+        const el = document.createElement('div');
+        el.className = "bg-gray-900 p-6 rounded shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl fade-in";
+        el.innerHTML = `
+          <h4 class="text-xl font-semibold mb-2">${tower.id} - ${tower.name}</h4>
+          <p class="mb-1">${getTypeEmoji(tower.type)} Type: <strong>${tower.type}</strong></p>
+          <p class="mb-2">${getStatEmoji(tower.statType)} Stat Type: <strong>${tower.statType}</strong></p>
+          <ul class="text-sm space-y-1">
+            <li>💥 Damage: ${tower.damage}</li>
+            <li>📏 Range: ${tower.range}</li>
+            <li>⏱️ Cooldown: ${tower.cooldown}s</li>
+            <li>🪙 Cost: ${tower.cost}</li>
+            ${tower.pierce ? `<li>🧿 Pierce: ${tower.pierce}</li>` : ''}
+            ${tower.burstCount ? `<li>💢 Burst Count: ${tower.burstCount}</li>` : ''}
+            ${tower.burstRate ? `<li>⏲️ Burst Rate: ${tower.burstRate}s</li>` : ''}
+            ${tower.chainCount ? `<li>⚡ Chain Count: ${tower.chainCount}</li>` : ''}
+            ${tower.chainRange ? `<li>📡 Chain Range: ${tower.chainRange}</li>` : ''}
+            ${tower.income ? `<li>💸 Income: ${tower.income}</li>` : ''}
+            ${tower.interval ? `<li>⏳ Interval: ${tower.interval}s</li>` : ''}
+          </ul>
+        `;
+        grid.appendChild(el);
+      });
+    }
+
     fetch('https://raw.githubusercontent.com/blazingror/infectimon/main/towers.json')
       .then(res => res.json())
       .then(data => {
-        const grid = document.getElementById('towerGrid');
-        data.forEach(tower => {
-          const el = document.createElement('div');
-          el.className = "bg-gray-900 p-6 rounded shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl fade-in";
-          el.innerHTML = `
-            <h4 class="text-xl font-semibold mb-2">${tower.id} - ${tower.name}</h4>
-            <p class="mb-1">${getTypeEmoji(tower.type)} Type: <strong>${tower.type}</strong></p>
-            <p class="mb-2">${getStatEmoji(tower.statType)} Stat Type: <strong>${tower.statType}</strong></p>
-            <ul class="text-sm space-y-1">
-              <li>💥 Damage: ${tower.damage}</li>
-              <li>📏 Range: ${tower.range}</li>
-              <li>⏱️ Cooldown: ${tower.cooldown}s</li>
-              <li>🪙 Cost: ${tower.cost}</li>
-              ${tower.pierce ? `<li>🧿 Pierce: ${tower.pierce}</li>` : ''}
-              ${tower.burstCount ? `<li>💢 Burst Count: ${tower.burstCount}</li>` : ''}
-              ${tower.burstRate ? `<li>⏲️ Burst Rate: ${tower.burstRate}s</li>` : ''}
-              ${tower.chainCount ? `<li>⚡ Chain Count: ${tower.chainCount}</li>` : ''}
-              ${tower.chainRange ? `<li>📡 Chain Range: ${tower.chainRange}</li>` : ''}
-              ${tower.income ? `<li>💸 Income: ${tower.income}</li>` : ''}
-              ${tower.interval ? `<li>⏳ Interval: ${tower.interval}s</li>` : ''}
-            </ul>
-          `;
-          grid.appendChild(el);
-        });
+        towersData = data;
+        renderTowers(towersData);
       });
+
+    document.getElementById('towerSearch').addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase();
+      const filtered = towersData.filter(tower =>
+        tower.name.toLowerCase().includes(query) ||
+        tower.type.toLowerCase().includes(query) ||
+        tower.statType.toLowerCase().includes(query)
+      );
+      renderTowers(filtered);
+    });
 
     renderPromoCodes();
   </script>
