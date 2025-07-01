@@ -16,37 +16,36 @@
         opacity: 1;
       }
     }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: radial-gradient(white 1px, transparent 1px),
+                  radial-gradient(white 1px, transparent 1px);
+      background-position: 0 0, 25px 25px;
+      background-size: 50px 50px;
+      animation: moveBg 60s linear infinite;
+      opacity: 0.05;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    @keyframes moveBg {
+      from {
+        transform: translate(0, 0);
+      }
+      to {
+        transform: translate(-100px, -100px);
+      }
+    }
+
+    main, header, section, footer {
+      position: relative;
+      z-index: 1;
+    }
   </style>
-  <style>
-  body::before {
-    content: "";
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
-    background: radial-gradient(white 1px, transparent 1px),
-                radial-gradient(white 1px, transparent 1px);
-    background-position: 0 0, 25px 25px;
-    background-size: 50px 50px;
-    animation: moveBg 60s linear infinite;
-    opacity: 0.05;
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  @keyframes moveBg {
-    from {
-      transform: translate(0, 0);
-    }
-    to {
-      transform: translate(-100px, -100px);
-    }
-  }
-
-  main, header, section, footer {
-    position: relative;
-    z-index: 1;
-  }
-</style>
 </head>
 <body class="bg-gray-900 text-white font-sans">
 
@@ -133,43 +132,20 @@
       Object.entries(promoCodes).forEach(([code, rewards]) => {
         const card = document.createElement('div');
         card.className = "bg-gray-800 p-6 rounded shadow transform transition duration-300 hover:scale-105 hover:shadow-xl fade-in";
-       card.innerHTML = `
-  <h4 class="text-xl font-semibold mb-2">Code: ${code}</h4>
-  <ul class="text-sm space-y-1 mb-2">
-    ${rewards.Coins ? `<li>🪙 Coins: ${rewards.Coins}</li>` : ''}
-    ${rewards.Gems ? `<li>💎 Gems: ${rewards.Gems}</li>` : ''}
-  </ul>
-  <div class="flex gap-2 flex-wrap">
-    ${rewards.devOnly ? `<span class="inline-block bg-purple-700 text-white text-xs px-2 py-1 rounded-full font-semibold">Dev Only</span>` : ''}
-    ${rewards.vipOnly ? `<span class="inline-block bg-yellow-600 text-white text-xs px-2 py-1 rounded-full font-semibold">VIP Only</span>` : ''}
-  </div>
-`;
-
+        card.innerHTML = `
+          <h4 class="text-xl font-semibold mb-2">Code: ${code}</h4>
+          <ul class="text-sm space-y-1 mb-2">
+            ${rewards.Coins ? `<li>🪙 Coins: ${rewards.Coins}</li>` : ''}
+            ${rewards.Gems ? `<li>💎 Gems: ${rewards.Gems}</li>` : ''}
+          </ul>
+          <div class="flex gap-2 flex-wrap">
+            ${rewards.devOnly ? `<span class="inline-block bg-purple-700 text-white text-xs px-2 py-1 rounded-full font-semibold">Dev Only</span>` : ''}
+            ${rewards.vipOnly ? `<span class="inline-block bg-yellow-600 text-white text-xs px-2 py-1 rounded-full font-semibold">VIP Only</span>` : ''}
+          </div>
+        `;
         grid.appendChild(card);
       });
     }
-
-    fetch('https://raw.githubusercontent.com/blazingror/infectimon/main/towers.json')
-      .then(res => res.json())
-      .then(data => {
-        const grid = document.getElementById('towerGrid');
-        data.forEach(tower => {
-          const el = document.createElement('div');
-          el.className = "bg-gray-900 p-6 rounded shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl fade-in";
-          el.innerHTML = `
-            <h4 class="text-xl font-semibold mb-2">${tower.id} - ${tower.name}</h4>
-            <p class="mb-1">${getTypeEmoji(tower.type)} Type: <strong>${tower.type}</strong></p>
-            <p class="mb-2">${getStatEmoji(tower.statType)} Stat Type: <strong>${tower.statType}</strong></p>
-            <ul class="text-sm space-y-1">
-              <li>💥 Damage: ${tower.damage}</li>
-              <li>📏 Range: ${tower.range}</li>
-              <li>⏱️ Cooldown: ${tower.cooldown}s</li>
-              <li>🪙 Cost: ${tower.cost}</li>
-            </ul>
-          `;
-          grid.appendChild(el);
-        });
-      });
 
     function getTypeEmoji(type) {
       const map = {
@@ -190,12 +166,41 @@
         Grass: '🌿',
         Electric: '⚡',
         Normal: '🎯',
-        Dark: '🌑'
+        Dark: '🌑',
+        Flying: '🕊️'
       };
       return map[statType] || '❓';
     }
 
-    // Kickstart
+    fetch('https://raw.githubusercontent.com/blazingror/infectimon/main/towers.json')
+      .then(res => res.json())
+      .then(data => {
+        const grid = document.getElementById('towerGrid');
+        data.forEach(tower => {
+          const el = document.createElement('div');
+          el.className = "bg-gray-900 p-6 rounded shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl fade-in";
+          el.innerHTML = `
+            <h4 class="text-xl font-semibold mb-2">${tower.id} - ${tower.name}</h4>
+            <p class="mb-1">${getTypeEmoji(tower.type)} Type: <strong>${tower.type}</strong></p>
+            <p class="mb-2">${getStatEmoji(tower.statType)} Stat Type: <strong>${tower.statType}</strong></p>
+            <ul class="text-sm space-y-1">
+              <li>💥 Damage: ${tower.damage}</li>
+              <li>📏 Range: ${tower.range}</li>
+              <li>⏱️ Cooldown: ${tower.cooldown}s</li>
+              <li>🪙 Cost: ${tower.cost}</li>
+              ${tower.pierce ? `<li>🧿 Pierce: ${tower.pierce}</li>` : ''}
+              ${tower.burstCount ? `<li>💢 Burst Count: ${tower.burstCount}</li>` : ''}
+              ${tower.burstRate ? `<li>⏲️ Burst Rate: ${tower.burstRate}s</li>` : ''}
+              ${tower.chainCount ? `<li>⚡ Chain Count: ${tower.chainCount}</li>` : ''}
+              ${tower.chainRange ? `<li>📡 Chain Range: ${tower.chainRange}</li>` : ''}
+              ${tower.income ? `<li>💸 Income: ${tower.income}</li>` : ''}
+              ${tower.interval ? `<li>⏳ Interval: ${tower.interval}s</li>` : ''}
+            </ul>
+          `;
+          grid.appendChild(el);
+        });
+      });
+
     renderPromoCodes();
   </script>
 </body>
