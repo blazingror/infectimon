@@ -67,12 +67,12 @@
     "name": "Budroot",
     "type": "Rapid",
     "statType": "Grass",
-    "damage": 80,
+    "damage": 20,
     "range": 10,
     "cooldown": 2,
     "cost": 100,
     "burstCount": 5,
-    "burstRate": 0.2
+    "burstRate": 0.1
   },
   {
     "id": "#008",
