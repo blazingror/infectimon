@@ -4,8 +4,8 @@
     "name": "Scorchid",
     "type": "AOE",
     "statType": "Fire",
-    "damage": 60,
-    "range": 15,
+    "damage": 10,
+    "range": 8,
     "cooldown": 1.5,
     "cost": 100
   },
@@ -14,8 +14,8 @@
     "name": "Blazid",
     "type": "AOE",
     "statType": "Fire",
-    "damage": 100,
-    "range": 15,
+    "damage": 35,
+    "range": 10,
     "cooldown": 1,
     "cost": 400
   },
@@ -24,8 +24,8 @@
     "name": "InterFlame",
     "type": "AOE",
     "statType": "Fire",
-    "damage": 250,
-    "range": 15,
+    "damage": 30,
+    "range": 10,
     "cooldown": 0.5,
     "cost": 1000
   },
@@ -34,8 +34,8 @@
     "name": "Bubblix",
     "type": "Pierce",
     "statType": "Water",
-    "damage": 50,
-    "range": 20,
+    "damage": 10,
+    "range": 12,
     "cooldown": 1.5,
     "cost": 100,
     "pierce": 3
@@ -45,7 +45,7 @@
     "name": "Droplash",
     "type": "Pierce",
     "statType": "Water",
-    "damage": 50,
+    "damage": 15,
     "range": 15,
     "cooldown": 0.5,
     "cost": 400,
@@ -56,7 +56,7 @@
     "name": "Torrentaur",
     "type": "Pierce",
     "statType": "Water",
-    "damage": 200,
+    "damage": 35,
     "range": 15,
     "cooldown": 0.5,
     "cost": 1000,
@@ -67,11 +67,11 @@
     "name": "Budroot",
     "type": "Rapid",
     "statType": "Grass",
-    "damage": 20,
-    "range": 10,
-    "cooldown": 2,
+    "damage": 6,
+    "range": 8,
+    "cooldown": 1,
     "cost": 100,
-    "burstCount": 5,
+    "burstCount": 3,
     "burstRate": 0.1
   },
   {
@@ -79,11 +79,11 @@
     "name": "Thornid",
     "type": "Rapid",
     "statType": "Grass",
-    "damage": 50,
+    "damage": 10,
     "range": 15,
-    "cooldown": 2,
+    "cooldown": 1,
     "cost": 400,
-    "burstCount": 10,
+    "burstCount": 3,
     "burstRate": 0.1
   },
   {
@@ -91,9 +91,9 @@
     "name": "Verdawn",
     "type": "AOE",
     "statType": "Grass",
-    "damage": 300,
-    "range": 15,
-    "cooldown": 0.5,
+    "damage": 100,
+    "range": 6,
+    "cooldown": 1,
     "cost": 1000
   },
   {
@@ -104,8 +104,8 @@
     "damage": 0,
     "range": 0,
     "cooldown": 0,
-    "cost": 200,
-    "income": 25,
+    "cost": 100,
+    "income": 20,
     "interval": 10
   },
   {
@@ -124,12 +124,12 @@
     "name": "Buzzakeet",
     "type": "Chain",
     "statType": "Flying",
-    "damage": 50,
+    "damage": 5,
     "range": 15,
     "cooldown": 1,
     "cost": 400,
     "chainCount": 3,
-    "chainRange": 100
+    "chainRange": 25
   },
   {
     "id": "#013",
@@ -140,7 +140,7 @@
     "range": 20,
     "cooldown": 1,
     "cost": 1200,
-    "chainCount": 10,
-    "chainRange": 100
+    "chainCount": 5,
+    "chainRange": 50
   }
 ]
